@@ -71,18 +71,11 @@ No specific helper classes from other open-source projects are mentioned. Howeve
 
 Provide a section for each test suite that is planned and a paragraph describing what it will do.
 
-Functionality testing (TestZipTrees.java):
+Functionality testing/ Primary testing (TestZipTrees.java):
 This suite focuses on functionality testing, including unit tests for insertion, deletion, and search operations. It will cover normal cases, boundary conditions, and error scenarios to ensure the correctness of each operation under various circumstances. For insertion, tests will validate that elements are added correctly while maintaining the tree properties. Deletion tests will ensure accurate removal of elements without compromising the tree's integrity, and search tests will confirm the correct retrieval of elements.
 
-Data Structure Well-Formed-Ness Tests (TestInvariant.java):
-This suite verifies the integrity of the Zip Tree's data structure after operations. It ensures that the heap order based on ranks and the binary search tree properties are preserved, confirming the structural soundness of the Zip Tree under different scenarios.
-
 Efficiency Tests (TestEfficiency.java):
-This suite evaluates the performance of Zip Tree operations, focusing on time complexity. It aims to compare the efficiency of insertion, deletion, and search operations against theoretical expectations, providing insights into the practical performance of the Zip Trees data structure.
-
-Random Tests (TestGen.java):
-These tests simulate unpredictable usage scenarios by generating random inputs and operations. The goal is to cover a broader range of possibilities, complementing primary unit tests and ensuring the Zip Tree handles diverse scenarios effectively.
-
+This suite assesses the efficiency of Zip Tree operations, particularly focusing on their time complexity. Its objective is to compare the performance of insertion, deletion, and search operations against theoretical expectations, offering insights into the practical effectiveness of the Zip Trees data structure. Additionally, it conducts identical tests on Binary Search Trees for a comparative analysis.
 
 #### Functionality testing
 Functionality testing (TestZipTrees.java):
