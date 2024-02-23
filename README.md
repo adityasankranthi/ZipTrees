@@ -70,8 +70,6 @@ Efficiency Tests (TestEfficiency.java):
 This suite assesses the efficiency of Zip Tree operations, particularly focusing on their time complexity. Its objective is to compare the performance of insertion, deletion, and search operations against theoretical expectations, offering insights into the practical effectiveness of the Zip Trees data structure. Additionally, it conducts identical tests on Binary Search Trees for a comparative analysis.
 
 #### Functionality testing
-
-Functionality testing (TestZipTrees.java):
 This suite focuses on functionality testing, including unit tests for insertion, deletion, and search operations. It aims to ensure the correctness of each operation under various circumstances.
 ##### Insertion
 - **Sequential Insertion**: Tests adding elements in a sequential manner to assess the tree's ability to maintain order and balance.
@@ -83,9 +81,9 @@ This suite focuses on functionality testing, including unit tests for insertion,
 - **Structural Integrity**: Ensures the tree correctly restructures itself after deletions, maintaining proper heap order and binary search properties.
 
 ##### Search
-1. **Existence Check**: Verifies that the search operation can successfully locate and return a node or value for an element that exists within the tree.
-2. **Non-Existence Check**: Confirms that searches for elements not present in the tree accurately return a null or false indication, showcasing the tree's proper handling of such cases.
-3. **Boundary Conditions**: Tests the search functionality against boundary conditions, including searching for the smallest and largest elements, as well as operations on an empty tree.
+- **Existence Check**: Verifies that the search operation can successfully locate and return a node or value for an element that exists within the tree.
+- **Non-Existence Check**: Confirms that searches for elements not present in the tree accurately return a null or false indication, showcasing the tree's proper handling of such cases.
+- **Boundary Conditions**: Tests the search functionality against boundary conditions, including searching for the smallest and largest elements, as well as operations on an empty tree.
 
 ## Status
 
