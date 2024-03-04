@@ -94,3 +94,85 @@ Get Method: https://docs.rs/ziptree/latest/src/ziptree/lib.rs.html#115-135
 Insert Method: https://docs.rs/ziptree/latest/src/ziptree/lib.rs.html#196-332
 Remove Method: https://docs.rs/ziptree/latest/src/ziptree/lib.rs.html#334-477
 Clone Method: https://docs.rs/ziptree/latest/src/ziptree/lib.rs.html#629-691
+
+
+To evaluate the efficiency of Zip Trees in comparison to Normal Binary Search Trees, the following pseudocode outlines the operations related to a Normal Binary Search Tree in accordance to ZIP tree algorithm
+
+ALGORITHM 1: Recursive Versions of Insertion and Deletion
+
+insert_recursive(root, key):
+    if root is null then return new Node(key)
+    if key < root.key then root.left = insert(root.left, key)
+    else if key > root.key then root.right = insert(root.right, key)
+    return root
+
+delete_recursive(root, key):
+    if root is null then return root
+    if key < root.key then root.left = deleteNode(root.left, key)
+    else if key > root.key then root.right = deleteNode(root.right, key)
+    else:
+        if root.left is null then return root.right
+        else if root.right is null then return root.left
+        root.key = findMinValueNode(root.right).key
+        root.right = deleteNode(root.right, root.key)
+    return root
+    
+    
+ALGORITHM 2: Iterative Insertion
+
+insert_iterative(root, key):
+    new_node = new Node(key)
+    if root is null then return new_node
+    current = root
+    while current is not null:
+        if key < current.key:
+            if current.left is null then current.left = new_node
+                break
+            else then current = current.left
+        else:
+            if current.right is null then current.right = new_node
+                break
+            else then current = current.right
+    return root
+
+    
+ALGORITHM 3: Iterative Deletion
+
+delete_iterative(root, key):
+    current = root
+    parent = null
+    while current is not null and current.key is not equal to key:
+        parent = current
+        if key < current.key:
+            current = current.left
+        else:
+            current = current.right
+    if current is null then return root
+    if current.left is null:
+        temp = current.right
+        if parent is null then root = temp
+        else if key < parent.key then parent.left = temp
+        else then parent.right = temp
+    else if current.right is null:
+        temp = current.left
+        if parent is null then root = temp
+        else if key < parent.key then parent.left = temp
+        else then parent.right = temp
+    else:
+        temp = minValueNode(current.right)
+        current.key = temp.key
+        current.right = delete_iterative(current.right, temp.key)
+    return root
+    
+    
+Insert Method: https://www.geeksforgeeks.org/insertion-in-binary-search-tree/
+Delete Method: https://www.geeksforgeeks.org/deletion-in-binary-search-tree/ 
+
+
+
+
+
+
+
+
+ 
