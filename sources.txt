@@ -82,3 +82,15 @@ while left   null and right   null do
 		repeat {prev ← right; right ← right.left}
 		until right = null or left.rank ≥ right.rank
 		prev.left ← left
+		
+			
+Rust Implementation of Tarjan's Zip Tree: To implement Zip Trees in Java based on the Rust project, we would translate the Rust code for get, insert, remove, and clone methods into Java, adapting Rust's ownership and type system to Java's object-oriented paradigm. 
+This involves creating a ZipTree class in Java with methods that mimic the functionality of the Rust version, ensuring to handle memory management according to Java's garbage collection system. 
+We would also need to adjust for Rust's pattern matching and error handling to fit Java's exception handling mechanisms.
+
+Detailed Rust implementations by the author - Tarjan's zip tree implementation: https://docs.rs/ziptree/latest/ziptree/index.html
+
+Get Method: https://docs.rs/ziptree/latest/src/ziptree/lib.rs.html#115-135
+Insert Method: https://docs.rs/ziptree/latest/src/ziptree/lib.rs.html#196-332
+Remove Method: https://docs.rs/ziptree/latest/src/ziptree/lib.rs.html#334-477
+Clone Method: https://docs.rs/ziptree/latest/src/ziptree/lib.rs.html#629-691

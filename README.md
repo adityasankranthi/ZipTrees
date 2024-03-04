@@ -91,3 +91,6 @@ Add section using the current date as the heading and describe the status in a f
 
 Status (as of current date: 02-19-2024)
 The project plan is well-defined, with the main classes identified and comprehensive test suites outlined to ensure the functionality and efficiency of the Zip Trees implementation. The initial coding phase is underway, with a focus on meeting the outlined milestones and completing the primary functionality tests.
+
+Status (as of current date: 03-03-2024)
+We've included some key resources that will help us build and refine our Zip Trees implementation in Java. We've looked into Rust implementation and understand better how to handle insertions, deletions. We also included the existing implementations of BST which we will use to perform comparative analysis.
