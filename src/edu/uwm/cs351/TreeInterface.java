@@ -1,6 +1,6 @@
 package edu.uwm.cs351;
 
-public interface TreeInterface<T extends Comparable<T>> {
+public interface TreeInterface<T> {
 	
 	// Method to insert a new node with the given key
     void insert(T key);
