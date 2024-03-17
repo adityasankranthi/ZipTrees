@@ -1,6 +1,6 @@
 package edu.uwm.cs351;
 
-public class AVLTree<T> implements TreeInterface<T> {
+public class AVLTree<T extends Comparable<T>> implements TreeInterface<T> {
 	
 	// TODO: Data structure
 	
