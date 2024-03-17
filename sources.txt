@@ -164,10 +164,11 @@ delete_iterative(root, key):
         current.right = delete_iterative(current.right, temp.key)
     return root
     
-    
+To compare ZIP tree with any other normal BST there isn't a predefined library which implements a BST . So we are implementing a AVL tree as well and then compare with ZIP tree. To implement AVL tree we are referring the below links.     
+
 Insert Method: https://www.geeksforgeeks.org/insertion-in-binary-search-tree/
 Delete Method: https://www.geeksforgeeks.org/deletion-in-binary-search-tree/ 
-
+https://commons.apache.org/proper/commons-math/javadocs/api-3.6.1/src-html/org/apache/commons/math3/geometry/partitioning/utilities/AVLTree.html#line.56
 
 
 
