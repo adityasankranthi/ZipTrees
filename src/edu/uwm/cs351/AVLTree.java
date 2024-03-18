@@ -1,11 +1,19 @@
 package edu.uwm.cs351;
 
+/**
+ * An AVL Tree implementation.
+ * @param <T> The type of elements stored in the tree, must implement Comparable.
+ */
+
 public class AVLTree<T extends Comparable<T>> implements TreeInterface<T> {
 
-	// TODO: Data structure
-
+	//Data structure
 	private AVLNode<T> root;
-
+    
+	/**
+     * AVLNode class represents a node in the AVL tree.
+     * @param <DataT> The type of data stored in the node.
+     */
 	private static class AVLNode<DataT> {
 		DataT key;
 		AVLNode<DataT> left, right;
@@ -19,12 +27,16 @@ public class AVLTree<T extends Comparable<T>> implements TreeInterface<T> {
 			this.left = l;
 			this.right = r;
 			height = 1;
+			this.key=key;
 
 		}
 	}
 
 	@Override
     public void insert(T key) {
+		if (key == null) {
+	        throw new IllegalArgumentException("Key cannot be null");
+	    }
         root = insert(root, key);
     }
 
@@ -38,6 +50,8 @@ public class AVLTree<T extends Comparable<T>> implements TreeInterface<T> {
             node.left = insert(node.left, key);
         } else if (cmp > 0) {
             node.right = insert(node.right, key);
+        }else {
+            node.key = key; 
         }
 
     
@@ -129,7 +143,6 @@ public class AVLTree<T extends Comparable<T>> implements TreeInterface<T> {
 		if (node == null) {
 			return false;
 		}
-
 		int cmp = key.compareTo(node.key);
 		if (cmp == 0) {
 			return true;
