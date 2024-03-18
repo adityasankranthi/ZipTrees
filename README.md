@@ -94,3 +94,7 @@ The project plan is well-defined, with the main classes identified and comprehen
 
 Status (as of current date: 03-03-2024)
 We've included some key resources that will help us build and refine our Zip Trees implementation in Java. We've looked into Rust implementation and understand better how to handle insertions, deletions. We also included the existing implementations of BST which we will use to perform comparative analysis.
+
+Status (as of current date: 03-07-2024)
+Configured Junit4 test suite , Created Interface file (TreeInterface) for AVL and ZIP Tree ADTs .Implemented AVL tree methods except delete, established a skeleton Zip tree class inheriting  methods from TreeInterface, and created test cases for AVL insert and search method. Focus is on implementing ZIP tree and compare the efficiency with AVL tree also enhancing tests and improving documentation. 
+
