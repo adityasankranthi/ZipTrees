@@ -129,7 +129,19 @@ public class AVLTree<T extends Comparable<T>> implements TreeInterface<T> {
 
 	@Override
 	public void delete(T key) {
-		// TODO Auto-generated method stub
+	    if (key == null) {
+	        throw new IllegalArgumentException("Key cannot be null");
+	    }
+	    root = delete(root, key);
+	}
+	
+	private AVLNode<T> delete(AVLNode<T> node, T key) {
+	    if (node == null) {
+	        return null;
+	    }
+	    
+		return node;
+	    
 	}
 
 	@Override
