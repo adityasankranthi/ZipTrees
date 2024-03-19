@@ -32,7 +32,7 @@ public class AVLTree<T extends Comparable<T>> implements TreeInterface<T> {
 		}
 	}
 
-	@Override
+	@Override		//required
     public void insert(T key) {
 		if (key == null) {
 	        throw new IllegalArgumentException("Key cannot be null");
@@ -127,7 +127,7 @@ public class AVLTree<T extends Comparable<T>> implements TreeInterface<T> {
     }
 
 
-	@Override
+	@Override		//required
 	public void delete(T key) {
 	    if (key == null) {
 	        throw new IllegalArgumentException("Key cannot be null");
@@ -140,11 +140,35 @@ public class AVLTree<T extends Comparable<T>> implements TreeInterface<T> {
 	        return null;
 	    }
 	    
+	    int cmp = key.compareTo(node.key);
+	    if (cmp < 0) {
+	        node.left = delete(node.left, key);
+	    } else if (cmp > 0) {
+	        node.right = delete(node.right, key);
+	    } else {
+	        if (node.left == null || node.right == null) {
+	            node = (node.left == null) ? node.right : node.left;
+	        } else {
+	            AVLNode<T> temp = minValueNode(node.right);
+	            node.key = temp.key;
+	            node.right = delete(node.right, temp.key);
+	        }
+	    }
+
+	 
 		return node;
 	    
 	}
 
-	@Override
+	private AVLNode<T> minValueNode(AVLNode<T> node) {
+	    AVLNode<T> current = node;
+	    while (current.left != null) {
+	        current = current.left;
+	    }
+	    return current;
+	}
+
+	@Override		//required
 	public boolean search(T key) {
 		return search(root, key);
 	}
