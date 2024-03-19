@@ -1,22 +1,54 @@
 package edu.uwm.cs351;
 
+/**
+ * Interface defining the operations for a tree structure.
+ *
+ * @param <T> The type of elements stored in the tree, must implement Comparable.
+ */
+
 public interface TreeInterface<T extends Comparable<T>> {
-	// Method to insert a new node with the given key
-    void insert(T key);
 
-    // Method to delete a node with the given key
-    void delete(T key);
+	/**
+     * Inserts a new node with the specified key into the tree.
+     * 
+     * @param key The key to insert into the tree.
+     */
+    public void insert(T key);
 
-    // Method to search for a node with the given key
-    boolean search(T key);
+    /**
+     * Deletes the node with the specified key from the tree, if it exists.
+     * 
+     * @param key The key of the node to be deleted.
+     */    
+    public void delete(T key);
 
-    // Method to check if the tree is empty
-    boolean isEmpty();
+    /**
+     * Searches for a node with the specified key in the tree.
+     * 
+     * @param key The key to search for.
+     * @return true if the node is found, false otherwise.
+     */    
+    public boolean search(T key);
 
-    // Method to get the height of the tree
-    int getHeight();
+    /**
+     * Checks if the tree is empty.
+     * 
+     * @return true if the tree is empty, false otherwise.
+     */
+    public boolean isEmpty();
 
-    // Method to get the size (number of nodes) of the tree
-    int getSize();
+    /**
+     * Returns the height of the tree.
+     * 
+     * @return The height of the tree, or 0 if the tree is empty.
+     */
+    public int getHeight();
+
+    /**
+     * Returns the number of nodes in the tree.
+     * 
+     * @return The size of the tree.
+     */
+    public int getSize();
 
 }

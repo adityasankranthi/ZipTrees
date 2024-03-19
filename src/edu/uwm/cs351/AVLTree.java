@@ -130,12 +130,10 @@ public class AVLTree<T extends Comparable<T>> implements TreeInterface<T> {
 	@Override
 	public void delete(T key) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public boolean search(T key) {
-		// TODO Auto-generated method stub
 		return search(root, key);
 	}
 
@@ -155,19 +153,16 @@ public class AVLTree<T extends Comparable<T>> implements TreeInterface<T> {
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
 		return root == null;
 	}
 
 	@Override
 	public int getHeight() {
-		// TODO Auto-generated method stub
 		return root == null ? 0 : root.height;
     }
 
 	@Override
 	public int getSize() {
-		// TODO Auto-generated method stub
 		return getSize(root);
 	}
 	int count=0;
