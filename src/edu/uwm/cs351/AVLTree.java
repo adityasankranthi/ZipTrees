@@ -136,6 +136,10 @@ public class AVLTree<T extends Comparable<T>> implements TreeInterface<T> {
 	}
 	
 	private AVLNode<T> delete(AVLNode<T> node, T key) {
+		
+	    if (node == null) {
+	        return null;
+	    }
 	    
 	    int cmp = key.compareTo(node.key);
 	    if (cmp < 0) {

@@ -47,6 +47,32 @@ public class AVLTreeTest {
         assertFalse(tree.search(40));
         assertFalse(tree.search(80));
     }
+	
+    @Test
+    public void testDelete1() {
+        tree.insert(50);
+        tree.insert(30);
+        tree.insert(70);
+        tree.delete(70);
+        assertEquals(2, tree.getSize());
+        assertFalse(tree.search(70));
+    }
+    
+    @Test
+    public void testDelete2() {
+        tree.insert(50);
+        tree.insert(30);
+        tree.insert(70);
+        tree.insert(20);
+        tree.insert(40);
+        tree.insert(60);
+        tree.insert(80);
+        tree.delete(30);
+        assertEquals(6, tree.getSize());
+        assertFalse(tree.search(30));
+        assertTrue(tree.search(20));
+        assertTrue(tree.search(40));
+    }
     
     
 }
