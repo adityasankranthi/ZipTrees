@@ -136,9 +136,6 @@ public class AVLTree<T extends Comparable<T>> implements TreeInterface<T> {
 	}
 	
 	private AVLNode<T> delete(AVLNode<T> node, T key) {
-	    if (node == null) {
-	        return null;
-	    }
 	    
 	    int cmp = key.compareTo(node.key);
 	    if (cmp < 0) {
@@ -154,7 +151,37 @@ public class AVLTree<T extends Comparable<T>> implements TreeInterface<T> {
 	            node.right = delete(node.right, temp.key);
 	        }
 	    }
+	    
+	    if (node == null) {
+	        return null;
+	    }
 
+	    // Update height
+	    node.height = 1 + Math.max(height(node.left), height(node.right));
+
+	    int balance = getBalance(node);
+
+	    // Left Left Case
+	    if (balance > 1 && getBalance(node.left) >= 0) {
+	        return rotateRight(node);
+	    }
+
+	    // Left Right Case
+	    if (balance > 1 && getBalance(node.left) < 0) {
+	        node.left = rotateLeft(node.left);
+	        return rotateRight(node);
+	    }
+
+	    // Right Right Case
+	    if (balance < -1 && getBalance(node.right) <= 0) {
+	        return rotateLeft(node);
+	    }
+
+	    // Right Left Case
+	    if (balance < -1 && getBalance(node.right) > 0) {
+	        node.right = rotateRight(node.right);
+	        return rotateLeft(node);
+	    }
 	 
 		return node;
 	    
