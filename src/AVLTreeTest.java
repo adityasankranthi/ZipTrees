@@ -7,6 +7,33 @@ import edu.uwm.cs351.AVLTree;
 public class AVLTreeTest {
 	
     AVLTree<Integer> tree = new AVLTree<>();
+    
+    // testing empty AVL tree
+    @Test
+    public void testEmptyTree01() {
+        assertTrue(tree.isEmpty()); 
+    }
+
+    @Test
+    public void testEmptyTree02() {
+        assertEquals(0, tree.getSize()); 
+    }
+
+    @Test
+    public void testEmptyTree03() {
+        assertFalse(tree.search(10)); 
+    }
+
+    @Test
+    public void testEmptyTree04() {
+        assertNull(tree.getHeight()); 
+    }
+
+    @Test
+    public void testEmptyTree05() {
+        tree.delete(5);
+        assertTrue(tree.isEmpty());
+    }
 
 	@Test
     public void testInsert1() {
