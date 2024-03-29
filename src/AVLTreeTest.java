@@ -26,7 +26,7 @@ public class AVLTreeTest {
 
     @Test
     public void testEmptyTree04() {
-        assertNull(tree.getHeight()); 
+    	assertEquals(0, tree.getHeight()); 
     }
 
     @Test
@@ -35,6 +35,7 @@ public class AVLTreeTest {
         assertTrue(tree.isEmpty());
     }
 
+    // testing insert method
 	@Test
     public void testInsert1() {
         tree.insert(5);
@@ -49,9 +50,118 @@ public class AVLTreeTest {
         tree.insert(10);
         assertEquals(1, tree.getSize()); 
     }
+	@Test
+	public void testInsert3() {
+	    assertThrows(IllegalArgumentException.class, () -> {
+	        tree.insert(null);
+	    });
+	    assertTrue(tree.isEmpty());
+	}
 
 	@Test
-    public void testSearch1() {
+	public void testInsert4() {
+	    tree.insert(5);
+	    assertEquals(1, tree.getSize());
+	}
+
+	@Test
+	public void testInsert5() {
+	    tree.insert(Integer.MAX_VALUE);
+	    assertEquals(1, tree.getSize());
+	    assertTrue(tree.search(Integer.MAX_VALUE));
+	}
+
+	@Test
+	public void testInsert6() {
+	    tree.insert(Integer.MIN_VALUE);
+	    assertEquals(1, tree.getSize());
+	    assertTrue(tree.search(Integer.MIN_VALUE));
+	}
+
+	@Test
+	public void testInsert7() {
+	    for (int i = 0; i < 1000; i++) {
+	        tree.insert(i);
+	    }
+	    assertEquals(1000, tree.getSize());
+	    for (int i = 0; i < 1000; i++) {
+	        assertTrue(tree.search(i));
+	    }
+	}
+
+	@Test
+	public void testInsert8() {
+	    for (int i = 10; i > 0; i--) {
+	        tree.insert(i);
+	    }
+	    assertEquals(10, tree.getSize());
+	    for (int i = 1; i <= 10; i++) {
+	        assertTrue(tree.search(i));
+	    }
+	}
+
+	@Test
+	public void testInsert9() {
+	    for (int i = 1; i <= 10; i++) {
+	        tree.insert(i);
+	    }
+	    assertEquals(10, tree.getSize());
+	    for (int i = 1; i <= 10; i++) {
+	        assertTrue(tree.search(i));
+	    }
+	}
+
+	@Test
+	public void testInsert10() {
+	    for (int i = 0; i > -10; i--) {
+	        tree.insert(i);
+	    }
+	    assertEquals(10, tree.getSize());
+	    for (int i = -9; i < 0; i++) {
+	        assertTrue(tree.search(i));
+	    }
+	}
+
+	@Test
+	public void testInsert11() {
+	    tree.insert(5);
+	    tree.insert(5);
+	    tree.insert(5);
+	    assertEquals(1, tree.getSize());
+	    assertTrue(tree.search(5));
+	}
+
+	@Test
+	public void testInsert12() {
+	    tree.insert(3);
+	    tree.insert(2);
+	    tree.insert(1);
+	    assertEquals(3, tree.getSize());
+	    assertTrue(tree.search(1));
+	    assertTrue(tree.search(2));
+	    assertTrue(tree.search(3));
+	}
+	
+	// testing search
+	@Test
+	public void testSearch1() {
+	    assertFalse(tree.search(10));
+	}
+
+	@Test
+	public void testSearch2() {
+	    tree.insert(5);
+	    assertTrue(tree.search(5));
+	}
+
+	@Test
+	public void testSearch3() {
+	    tree.insert(5);
+	    assertFalse(tree.search(10));
+	}
+	
+	@Test
+    public void testSearch4() {
         tree.insert(5);
         tree.insert(10);
         tree.insert(15);
@@ -62,7 +172,7 @@ public class AVLTreeTest {
     }
 	
 	@Test
-    public void testSearch2() {
+    public void testSearch5() {
         int[] values = {5, 15, 25, 35, 65, 75};		//In a Complex Tree
         for (int value : values) {
             tree.insert(value);
@@ -74,6 +184,59 @@ public class AVLTreeTest {
         assertFalse(tree.search(40));
         assertFalse(tree.search(80));
     }
+
+	@Test
+	public void testSearch6() {
+	    for (int i = 10; i > 0; i--) {
+	        tree.insert(i);
+	    }
+	    for (int i = 1; i <= 10; i++) {
+	        assertTrue(tree.search(i));
+	    }
+	}
+
+	@Test
+	public void testSearch7() {
+	    for (int i = 1; i <= 10; i++) {
+	        tree.insert(i);
+	    }
+	    for (int i = 1; i <= 10; i++) {
+	        assertTrue(tree.search(i));
+	    }
+	}
+
+	@Test
+	public void testSearch8() {
+	    for (int i = 0; i < 1000; i++) {
+	        tree.insert(i);
+	    }
+	    for (int i = 0; i < 1000; i++) {
+	        assertTrue(tree.search(i));
+	    }
+	}
+
+	@Test
+	public void testSearch9() {
+	    for (int i = 0; i > -10; i--) {
+	        tree.insert(i);
+	    }
+	    for (int i = -9; i < 0; i++) {
+	        assertTrue(tree.search(i));
+	    }
+	}
+
+	@Test
+	public void testSearch10() {
+	    tree.insert(5);
+	    tree.insert(5);
+	    assertTrue(tree.search(5));
+	}
+
+	@Test
+	public void testSearch12() {
+	    assertFalse(tree.search(null));
+	}
+
 	
     @Test
     public void testDelete1() {
