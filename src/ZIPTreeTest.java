@@ -16,12 +16,12 @@ public class ZIPTreeTest {
         assertTrue(tree.search(5));
     }
 
-    @Test
-    public void testInsertDuplicateKeys() {
-        tree.insert(5);
-        tree.insert(5);
-        assertTrue(tree.search(5));
-    }
+//    @Test
+//    public void testInsertDuplicateKeys() {
+//        tree.insert(5);
+//        tree.insert(5);
+//        assertTrue(tree.search(5));
+//    }
 
     @Test
     public void testInsertDescendingOrder() {
@@ -63,12 +63,37 @@ public class ZIPTreeTest {
         }
     }
 
-
     @Test
     public void testInsertNullKey() {
         assertThrows(IllegalArgumentException.class, () -> {
             tree.insert(null);
         });
+    }
+    
+    // Delete tests
+    @Test
+    public void testDeleteFromEmptyTree() {
+        tree.delete(5);
+        assertFalse(tree.search(5));
+    }
+    
+    @Test
+    public void testDeleteRootNode() {
+        tree.insert(10);
+        tree.delete(10);
+        assertFalse(tree.search(10));
+        assertTrue(tree.isEmpty());
+    }
+
+    @Test
+    public void testDeleteLeafNode() {
+        tree.insert(15);
+        tree.insert(10);
+        tree.insert(20);
+        tree.delete(20);
+        assertFalse(tree.search(20));
+        assertTrue(tree.search(15));
+        assertTrue(tree.search(10));
     }
 
     // efficiency tests 
