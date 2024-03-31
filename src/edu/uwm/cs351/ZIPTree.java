@@ -95,6 +95,43 @@ public class ZIPTree<T extends Comparable<T>> implements TreeInterface<T> {
 	        }
 	        if (cur == null) return; 
 	    }
+	    
+	    ZipNode<T> left = cur.left;
+	    ZipNode<T> right = cur.right;
+
+	    if (left == null) {
+	        cur = right;
+	    } else if (right == null) {
+	        cur = left;
+	    } else if (left.rank >= right.rank) {
+	        cur = left;
+	    } else {
+	        cur = right;
+	    }
+
+	    if (root.key.equals(key)) {
+	        root = cur;
+	    } else if (key.compareTo(prev.key) < 0) {
+	        prev.left = cur;
+	    } else {
+	        prev.right = cur;
+	    }
+	    
+	    while (left != null && right != null) {
+	        if (left.rank >= right.rank) {
+	            do {
+	                prev = left;
+	                left = left.right;
+	            } while (left != null && left.rank >= right.rank);
+	            prev.right = right;
+	        } else {
+	            do {
+	                prev = right;
+	                right = right.left;
+	            } while (right != null && left.rank >= right.rank);
+	            prev.left = left;
+	        }
+	    }
 		
 	}
 
