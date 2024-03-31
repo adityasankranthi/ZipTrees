@@ -82,7 +82,7 @@ This suite focuses on functionality testing, including unit tests for insertion,
 
 ##### Search
 - **Existence Check**: Verifies that the search operation can successfully locate and return a node or value for an element that exists within the tree.
-- **Non-Existence Check**: Confirms that searches for elements not present in the tree accurately return a null or false indication, showcasing the tree's proper handling of such cases.
+- **Non-Existence Check**: Confirms that searches for elements not present in the tree accurately return a null or false indication, show casing the tree's proper handling of such cases.
 - **Boundary Conditions**: Tests the search functionality against boundary conditions, including searching for the smallest and largest elements, as well as operations on an empty tree.
 
 ## Status
@@ -98,3 +98,8 @@ We've included some key resources that will help us build and refine our Zip Tre
 Status (as of current date: 03-07-2024)
 Configured Junit4 test suite , Created Interface file (TreeInterface) for AVL and ZIP Tree ADTs .Implemented AVL tree methods except delete, established a skeleton Zip tree class inheriting  methods from TreeInterface, and created test cases for AVL insert and search method. Focus is on implementing ZIP tree and compare the efficiency with AVL tree also enhancing tests and improving documentation. 
 
+Status (as of current date: 03-19-2024)
+Completed the implementation of the AVL Tree data structure with all essential methods, including the delete method. Added few test cases testing various scenarios of AVLTree implementation. These tests rigorously examine the behavior of the AVL Tree under various deletion scenarios, ensuring adherence to the AVL balancing properties.
+
+Status (as of current date: 03-31-2024)
+For the ZipTree class, essential methods for insertion, deletion, and search have been coded up, following the interface guidelines. Initial tests have been put in place to confirm that these methods are functioning correctly, laying the groundwork for further development and comparison with the AVL Tree's performance.
