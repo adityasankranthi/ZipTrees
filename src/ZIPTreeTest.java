@@ -11,20 +11,13 @@ public class ZIPTreeTest {
     
     // insert tests
     @Test
-    public void testInsertIntoEmptyTree() {
+    public void testInsert0() {
         tree.insert(5);
         assertTrue(tree.search(5));
     }
 
-//    @Test
-//    public void testInsertDuplicateKeys() {
-//        tree.insert(5);
-//        tree.insert(5);
-//        assertTrue(tree.search(5));
-//    }
-
     @Test
-    public void testInsertDescendingOrder() {
+    public void testInsert1() {
         for (int i = 10; i > 0; i--) {
             tree.insert(i);
         }
@@ -34,7 +27,7 @@ public class ZIPTreeTest {
     }
 
     @Test
-    public void testInsertAscendingOrder() {
+    public void testInsert2() {
         for (int i = 1; i <= 10; i++) {
             tree.insert(i);
         }
@@ -44,7 +37,7 @@ public class ZIPTreeTest {
     }
 
     @Test
-    public void testInsertLargeNumbers() {
+    public void testInsert3() {
         for (int i = 0; i < 1000; i++) {
             tree.insert(i);
         }
@@ -54,7 +47,7 @@ public class ZIPTreeTest {
     }
 
     @Test
-    public void testInsertNegativeNumbers() {
+    public void testInsert4() {
         for (int i = 0; i > -10; i--) {
             tree.insert(i);
         }
@@ -64,7 +57,7 @@ public class ZIPTreeTest {
     }
 
     @Test
-    public void testInsertNullKey() {
+    public void testInsert5() {
         assertThrows(IllegalArgumentException.class, () -> {
             tree.insert(null);
         });
