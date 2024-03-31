@@ -18,6 +18,9 @@ public class ZIPTree<T extends Comparable<T>> implements TreeInterface<T> {
 
     @Override
     public void insert(T key) {
+    	
+        if (key == null) throw new IllegalArgumentException("Key cannot be null");
+        
         int rank = (int) (Math.random() * Integer.MAX_VALUE); // Generate random rank
         ZipNode<T> newNode = new ZipNode<>(key);
         newNode.rank = rank;
@@ -137,8 +140,20 @@ public class ZIPTree<T extends Comparable<T>> implements TreeInterface<T> {
 
 	@Override
 	public boolean search(T key) {
-		// TODO Auto-generated method stub
-		return false;
+	    if (key == null) throw new IllegalArgumentException("Key cannot be null");
+	    
+	    ZipNode<T> current = root;
+	    while (current != null) {
+	        int cmp = key.compareTo(current.key);
+	        if (cmp < 0) {
+	            current = current.left; 
+	        } else if (cmp > 0) {
+	            current = current.right; 
+	        } else {
+	            return true;
+	        }
+	    }
+	    return false;
 	}
 
 	@Override
