@@ -83,7 +83,18 @@ public class ZIPTree<T extends Comparable<T>> implements TreeInterface<T> {
 
 	@Override
 	public void delete(T key) {
-		// TODO Auto-generated method stub
+		if (root == null) return;
+	    ZipNode<T> cur = root;
+	    ZipNode<T> prev = null;
+	    while (!cur.key.equals(key)) {
+	        prev = cur;
+	        if (key.compareTo(cur.key) < 0) {
+	            cur = cur.left;
+	        } else {
+	            cur = cur.right;
+	        }
+	        if (cur == null) return; 
+	    }
 		
 	}
 
