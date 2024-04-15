@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.uwm.cs351.ZIPTree;
+import edu.uwm.cs351.AVLTree;
 import edu.uwm.cs351.TreeInterface;
 
 import static org.junit.Assert.*;
@@ -13,13 +14,14 @@ public class TestEfficiency {
     private static final int MAX = 1 << POWER;
     private static final int TESTS = MAX / POWER;
 
-    private TreeInterface<Integer> tree;
+    private TreeInterface<Integer> zipTree,avlTree;
     private Integer[] items;
     private Random random;
 
     @Before
     public void setUp() {
-        tree = new ZIPTree<>();
+    	avlTree = new AVLTree<>();
+    	zipTree = new ZIPTree<>();
         items = new Integer[MAX];
         random = new Random();
 
@@ -27,42 +29,72 @@ public class TestEfficiency {
             items[i] = i;
         }
 
-        // Randomly insert items into the Zip Tree
+        // Randomly insert items into the Zip Tree and Avl Tree
         for (int i = 0; i < MAX; i++) {
             int index = random.nextInt(MAX - i);
-            tree.insert(items[index]);
+            zipTree.insert(items[index]);
+            avlTree.insert(items[index]);
             items[index] = items[MAX - i - 1];
         }
     }
 
     @Test
-    public void testSearch() {
+    public void testSearchZIP() {
         for (int i = 0; i < TESTS; i++) {
             int index = random.nextInt(MAX);
-            assertTrue(tree.search(items[index]));
+            assertTrue(zipTree.search(items[index]));
         }
     }
 
     @Test
-    public void testInsert() {
+    public void testSearchAVL() {
+        for (int i = 0; i < TESTS; i++) {
+            int index = random.nextInt(MAX);
+            assertTrue(avlTree.search(items[index]));
+        }
+    }
+
+    
+    @Test
+    public void testInsertZIP() {
         for (int i = 0; i < TESTS; i++) {
             int newItem = MAX + i;
-            tree.insert(newItem);
-            assertTrue(tree.search(newItem));
+            zipTree.insert(newItem);
+            assertTrue(zipTree.search(newItem));
+        }
+    }
+    @Test
+    public void testInsertAVL() {
+        for (int i = 0; i < TESTS; i++) {
+            int newItem = MAX + i;
+            avlTree.insert(newItem);
+            assertTrue(avlTree.search(newItem));
         }
     }
 
     @Test
-    public void testDelete() {
+    public void testDeleteZIP() {
         for (int i = 0; i < TESTS; i++) {
             int index = random.nextInt(MAX);
-            tree.delete(items[index]);
-            assertFalse(tree.search(items[index]));
+            zipTree.delete(items[index]);
+            assertFalse(zipTree.search(items[index]));
         }
     }
+    
+    
+
+    @Test
+    public void testDeleteAVL() {
+        for (int i = 0; i < TESTS; i++) {
+            int index = random.nextInt(MAX);
+            avlTree.delete(items[index]);
+            assertFalse(avlTree.search(items[index]));
+        }
+    }
+    
 
     @Test
     public void testSize() {
-        assertEquals(MAX, tree.getSize());
+        assertEquals(MAX, zipTree.getSize());
     }
 }
