@@ -103,3 +103,8 @@ Completed the implementation of the AVL Tree data structure with all essential m
 
 Status (as of current date: 03-31-2024)
 For the ZipTree class, essential methods for insertion, deletion, and search have been coded up, following the interface guidelines. Initial tests have been put in place to confirm that these methods are functioning correctly, laying the groundwork for further development and comparison with the AVL Tree's performance.
+
+Status (as of current date: 04-14-2024)
+Added all the methods for the ZIP Tree file and included the Efficiency Test file, along with the required test cases to compare both the ZIP tree and AVL tree. We observed a very small time difference in the execution of the test cases, where the ZIP tree test cases executed faster than the AVL tree. However, the time difference is very small. We plan to design better test cases to establish a legitimate difference in efficiency between AVL and ZIP Trees. 
+
+
