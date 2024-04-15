@@ -156,24 +156,35 @@ public class ZIPTree<T extends Comparable<T>> implements TreeInterface<T> {
 	    return false;
 	}
 
-	@Override
-	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean isEmpty() {
+        return root == null;
+    }
 
-	@Override
-	public int getHeight() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public int getHeight() {
+        return getHeightHelper(root);
+    }
 
-	@Override
-	public int getSize() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    private int getHeightHelper(ZipNode<T> node) {
+        if (node == null) {
+            return 0;
+        }
+        int leftHeight = getHeightHelper(node.left);
+        int rightHeight = getHeightHelper(node.right);
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
 
+    @Override
+    public int getSize() {
+        return getSizeHelper(root);
+    }
 
+    private int getSizeHelper(ZipNode<T> node) {
+        if (node == null) {
+            return 0;
+        }
+        return 1 + getSizeHelper(node.left) + getSizeHelper(node.right);
+    }
 }
 
