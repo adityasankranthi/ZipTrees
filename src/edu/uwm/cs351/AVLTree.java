@@ -46,12 +46,10 @@ public class AVLTree<T extends Comparable<T>> implements TreeInterface<T> {
         }
 
         int cmp = key.compareTo(node.key);
-        if (cmp < 0) {
+        if (cmp <= 0) {
             node.left = insert(node.left, key);
-        } else if (cmp > 0) {
+        } else  {
             node.right = insert(node.right, key);
-        }else {
-            node.key = key; 
         }
 
     

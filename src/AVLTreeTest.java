@@ -48,7 +48,7 @@ public class AVLTreeTest {
     public void testInsert2() {
         tree.insert(10);
         tree.insert(10);
-        assertEquals(1, tree.getSize()); 
+        assertEquals(2, tree.getSize()); 
     }
 	@Test
 	public void testInsert3() {
@@ -127,7 +127,7 @@ public class AVLTreeTest {
 	    tree.insert(5);
 	    tree.insert(5);
 	    tree.insert(5);
-	    assertEquals(1, tree.getSize());
+	    assertEquals(3, tree.getSize());
 	    assertTrue(tree.search(5));
 	}
 
@@ -264,5 +264,109 @@ public class AVLTreeTest {
         assertTrue(tree.search(40));
     }
     
+    @Test
+    public void testInsertAndDeleteDuplicateValues() {
+        tree.insert(5);
+        tree.insert(5);
+        tree.delete(5); 
+        assertTrue(tree.search(5)); 
+        tree.delete(5); 
+        assertFalse(tree.search(5)); 
+    }
+    @Test
+    public void testInsertAndSearchNegativeNumbers() {
+        tree.insert(-5);
+        tree.insert(-10);
+        assertTrue(tree.search(-5));
+        assertTrue(tree.search(-10));
+    }
     
+    @Test
+    public void testDeleteNegativeNumbers() {
+        tree.insert(-5);
+        tree.insert(-5);
+        tree.delete(-5); 
+        assertTrue(tree.search(-5)); 
+        tree.delete(-5); 
+        assertFalse(tree.search(-5));
+    }
+
+    @Test
+    public void testDeleteNodeWithTwoChildren() {
+        tree.insert(50);
+        tree.insert(30);
+        tree.insert(70);
+        tree.insert(20);
+        tree.insert(40);
+        tree.insert(60);
+        tree.insert(80);
+        tree.delete(30); 
+        assertEquals(6, tree.getSize());
+        assertFalse(tree.search(30));
+        assertTrue(tree.search(20));
+        assertTrue(tree.search(40));
+    }
+    
+    @Test
+    public void testDeleteNodeWithTwoChildrenNoBalancing() {
+        tree.insert(50);
+        tree.insert(30);
+        tree.insert(70);
+        tree.insert(20);
+        tree.insert(40);
+        tree.insert(60);
+        tree.insert(80);
+        tree.delete(70); 
+        assertEquals(6, tree.getSize());
+        assertFalse(tree.search(70));
+        assertTrue(tree.search(60));
+        assertTrue(tree.search(80));
+    }
+    
+    @Test
+    public void testDeleteRootNodeWithTwoChildren() {
+        tree.insert(50);
+        tree.insert(30);
+        tree.insert(70);
+        tree.insert(20);
+        tree.insert(40);
+        tree.insert(60);
+        tree.insert(80);
+        tree.delete(50); 
+        assertEquals(6, tree.getSize());
+        assertFalse(tree.search(50));
+        assertTrue(tree.search(60));
+        assertTrue(tree.search(70));
+    }
+    
+
+    @Test
+    public void testDeleteNonExistentNode() {
+        tree.insert(50);
+        tree.insert(30);
+        tree.insert(70);
+        tree.delete(80); 
+        assertEquals(3, tree.getSize());
+        assertTrue(tree.search(50));
+        assertTrue(tree.search(30));
+        assertTrue(tree.search(70));
+    }
+    
+ 
+    @Test
+    public void testDeleteFromEmptyTree() {
+        tree.delete(10); 
+        assertEquals(0, tree.getSize());
+        assertFalse(tree.search(10));
+    }
+    
+    @Test
+    public void testDeleteOnlyNode() {
+        tree.insert(10);
+        tree.delete(10); 
+        assertEquals(0, tree.getSize());
+        assertFalse(tree.search(10));
+    }
+
+ 
 }
