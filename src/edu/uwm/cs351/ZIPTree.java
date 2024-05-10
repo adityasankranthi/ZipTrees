@@ -92,7 +92,7 @@ public class ZIPTree<T extends Comparable<T>> implements TreeInterface<T> {
         }
     }
     
-    private int generateGeometricRank() {
+    public int generateGeometricRank() {
         // Geometric distribution with parameter p: P(X = k) = (1 - p)^(k - 1) * p
         double p = 0.5;
         return (int) Math.ceil(Math.log(1 - randomGenerator.nextDouble()) / Math.log(1 - p));

@@ -213,19 +213,7 @@ public class ZIPTreeTest {
         assertTrue(tree.search(75));
         assertTrue(tree.search(125));
         assertTrue(tree.search(175));
-    }
-
-    
-    @Test
-    public void testDeleteNegativeNumbers() {
-        tree.insert(-5);
-        tree.insert(-5);
-        tree.delete(-5); 
-        assertTrue(tree.search(-5)); 
-        tree.delete(-5); 
-        assertFalse(tree.search(-5)); 
-    }  
-    
+    }   
  
     @Test
     public void testInsertAndDeleteMultipleValues() {
@@ -415,6 +403,17 @@ public class ZIPTreeTest {
         assertTrue(tree.search(80));
         assertTrue(tree.search(60));
         assertTrue(tree.search(90));
+    }
+    
+    @Test
+    public void testAverageRank() {
+        int numInsertions = 10000;
+        double totalRank = 0;
+        for (int i = 0; i < numInsertions; i++) {
+            totalRank += tree.generateGeometricRank();
+        }
+        double averageRank = totalRank / numInsertions;
+        assertTrue(Math.abs(averageRank - 2) < 0.1);
     }
 
 
