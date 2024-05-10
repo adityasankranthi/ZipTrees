@@ -1,8 +1,11 @@
 package edu.uwm.cs351;
 
+import java.util.Random;
+
 public class ZIPTree<T extends Comparable<T>> implements TreeInterface<T> {
 
     private ZipNode<T> root;
+    private Random randomGenerator; 
     
     private static class ZipNode<DataT> {
     	DataT key;
@@ -15,13 +18,19 @@ public class ZIPTree<T extends Comparable<T>> implements TreeInterface<T> {
         }
         
     }
+    
+    public ZIPTree() {
+        this.root = null;
+        this.randomGenerator = new Random();
+    }
+    
 
     @Override
     public void insert(T key) {
     	
         if (key == null) throw new IllegalArgumentException("Key cannot be null");
         
-        int rank = (int) (Math.random() * Integer.MAX_VALUE); // Generate random rank
+        int rank = generateGeometricRank(); 
         ZipNode<T> newNode = new ZipNode<>(key);
         newNode.rank = rank;
         
@@ -81,6 +90,12 @@ public class ZIPTree<T extends Comparable<T>> implements TreeInterface<T> {
                 fix.right = cur;
             }
         }
+    }
+    
+    private int generateGeometricRank() {
+        // Geometric distribution with parameter p: P(X = k) = (1 - p)^(k - 1) * p
+        double p = 0.5;
+        return (int) Math.ceil(Math.log(1 - randomGenerator.nextDouble()) / Math.log(1 - p));
     }
 
 
