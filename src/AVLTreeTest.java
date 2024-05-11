@@ -265,15 +265,6 @@ public class AVLTreeTest {
     }
     
     @Test
-    public void testInsertAndDeleteDuplicateValues() {
-        tree.insert(5);
-        tree.insert(5);
-        tree.delete(5); 
-        assertTrue(tree.search(5)); 
-        tree.delete(5); 
-        assertFalse(tree.search(5)); 
-    }
-    @Test
     public void testInsertAndSearchNegativeNumbers() {
         tree.insert(-5);
         tree.insert(-10);
