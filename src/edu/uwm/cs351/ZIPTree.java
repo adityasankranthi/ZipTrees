@@ -8,168 +8,116 @@ public class ZIPTree<T extends Comparable<T>> implements TreeInterface<T> {
     private Random randomGenerator; 
     
     private static class ZipNode<DataT> {
-    	DataT key;
+        DataT key;
         ZipNode<DataT> left, right;
         int rank;
 
-        ZipNode(DataT key) {
+        ZipNode(DataT key, int rank) {
             this.key = key;
-            this.rank =0; 
+            this.rank = rank;
         }
-        
     }
     
     public ZIPTree() {
         this.root = null;
         this.randomGenerator = new Random();
     }
-    
 
     @Override
     public void insert(T key) {
-    	
         if (key == null) throw new IllegalArgumentException("Key cannot be null");
-        
-        int rank = generateGeometricRank(); 
-        ZipNode<T> newNode = new ZipNode<>(key);
-        newNode.rank = rank;
-        
-        if (root == null) { 
-            root = newNode;
-            return;
-        }
-        
-        ZipNode<T> cur = root;
-        ZipNode<T> prev = null;
-        
-        while (cur != null && (rank < cur.rank || (rank == cur.rank && key.compareTo(cur.key) > 0))) {
-            prev = cur;
-            if (key.compareTo(cur.key) < 0) {
-                cur = cur.left;
-            } else {
-                cur = cur.right;
-            }
-        }
-        
-        if (cur == root) {
-            root = newNode;
-        } else if (key.compareTo(prev.key) < 0) {
-            prev.left = newNode;
-        } else {
-            prev.right = newNode;
-        }
-        
-        if (cur == null) {
-            newNode.left = newNode.right = null;
-            return;
-        }
-        
-        if (key.compareTo(cur.key) < 0) {
-            newNode.right = cur;
-        } else {
-            newNode.left = cur;
-        }
-        
-        prev = newNode;
-        while (cur != null) {
-            ZipNode<T> fix = prev;
-            if (cur.key.compareTo(key) < 0) {
-                while (cur != null && cur.key.compareTo(key) < 0) {
-                    prev = cur;
-                    cur = cur.right;
-                }
-            } else {
-                while (cur != null && cur.key.compareTo(key) > 0) {
-                    prev = cur;
-                    cur = cur.left;
-                }
-            }
-            if (fix.key.compareTo(key) > 0 || (fix == newNode && prev.key.compareTo(key) > 0)) {
-                fix.left = cur;
-            } else {
-                fix.right = cur;
-            }
-        }
+        root = insertRecursive(root, key);
     }
     
+    private ZipNode<T> insertRecursive(ZipNode<T> node, T key) {
+        if (node == null) {
+            return new ZipNode<>(key, generateGeometricRank());
+        }
+        
+        int cmp = key.compareTo(node.key);
+        if (cmp < 0) {
+            node.left = insertRecursive(node.left, key);
+        } else if (cmp > 0) {
+            node.right = insertRecursive(node.right, key);
+        } else {
+            // Duplicate keys are not allowed; handle as needed
+            return node;
+        }
+        
+        // Maintain the heap property by rank
+        if (node.left != null && node.left.rank > node.rank) {
+            node = rotateRight(node);
+        }
+        if (node.right != null && node.right.rank > node.rank) {
+            node = rotateLeft(node);
+        }
+        return node;
+    }
+
+    private ZipNode<T> rotateRight(ZipNode<T> node) {
+        ZipNode<T> newRoot = node.left;
+        node.left = newRoot.right;
+        newRoot.right = node;
+        return newRoot;
+    }
+
+    private ZipNode<T> rotateLeft(ZipNode<T> node) {
+        ZipNode<T> newRoot = node.right;
+        node.right = newRoot.left;
+        newRoot.left = node;
+        return newRoot;
+    }
+
+    @Override
+    public void delete(T key) {
+        if (key == null) throw new IllegalArgumentException("Key cannot be null");
+        root = deleteRecursive(root, key);
+    }
+
+    private ZipNode<T> deleteRecursive(ZipNode<T> node, T key) {
+        if (node == null) return null;
+
+        int cmp = key.compareTo(node.key);
+        if (cmp < 0) {
+            node.left = deleteRecursive(node.left, key);
+        } else if (cmp > 0) {
+            node.right = deleteRecursive(node.right, key);
+        } else {
+            if (node.left == null) return node.right;
+            if (node.right == null) return node.left;
+            
+            if (node.left.rank > node.right.rank) {
+                node = rotateRight(node);
+                node.right = deleteRecursive(node.right, key);
+            } else {
+                node = rotateLeft(node);
+                node.left = deleteRecursive(node.left, key);
+            }
+        }
+        return node;
+    }
+
     public int generateGeometricRank() {
-        // Geometric distribution with parameter p: P(X = k) = (1 - p)^(k - 1) * p
         double p = 0.5;
         return (int) Math.ceil(Math.log(1 - randomGenerator.nextDouble()) / Math.log(1 - p));
     }
 
-
-	@Override
-	public void delete(T key) {
-		if (root == null) return;
-	    ZipNode<T> cur = root;
-	    ZipNode<T> prev = null;
-	    while (!cur.key.equals(key)) {
-	        prev = cur;
-	        if (key.compareTo(cur.key) < 0) {
-	            cur = cur.left;
-	        } else {
-	            cur = cur.right;
-	        }
-	        if (cur == null) return; 
-	    }
-	    
-	    ZipNode<T> left = cur.left;
-	    ZipNode<T> right = cur.right;
-
-	    if (left == null) {
-	        cur = right;
-	    } else if (right == null) {
-	        cur = left;
-	    } else if (left.rank >= right.rank) {
-	        cur = left;
-	    } else {
-	        cur = right;
-	    }
-
-	    if (root.key.equals(key)) {
-	        root = cur;
-	    } else if (key.compareTo(prev.key) < 0) {
-	        prev.left = cur;
-	    } else {
-	        prev.right = cur;
-	    }
-	    
-	    while (left != null && right != null) {
-	        if (left.rank >= right.rank) {
-	            do {
-	                prev = left;
-	                left = left.right;
-	            } while (left != null && left.rank >= right.rank);
-	            prev.right = right;
-	        } else {
-	            do {
-	                prev = right;
-	                right = right.left;
-	            } while (right != null && left.rank >= right.rank);
-	            prev.left = left;
-	        }
-	    }
-		
-	}
-
-	@Override
-	public boolean search(T key) {
-	    if (key == null) throw new IllegalArgumentException("Key cannot be null");
-	    
-	    ZipNode<T> current = root;
-	    while (current != null) {
-	        int cmp = key.compareTo(current.key);
-	        if (cmp < 0) {
-	            current = current.left; 
-	        } else if (cmp > 0) {
-	            current = current.right; 
-	        } else {
-	            return true;
-	        }
-	    }
-	    return false;
-	}
+    @Override
+    public boolean search(T key) {
+        if (key == null) throw new IllegalArgumentException("Key cannot be null");
+        ZipNode<T> current = root;
+        while (current != null) {
+            int cmp = key.compareTo(current.key);
+            if (cmp < 0) {
+                current = current.left;
+            } else if (cmp > 0) {
+                current = current.right;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public boolean isEmpty() {
@@ -202,4 +150,3 @@ public class ZIPTree<T extends Comparable<T>> implements TreeInterface<T> {
         return 1 + getSizeHelper(node.left) + getSizeHelper(node.right);
     }
 }
-
