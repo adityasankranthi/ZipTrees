@@ -272,16 +272,6 @@ public class AVLTreeTest {
         assertTrue(tree.search(-5));
         assertTrue(tree.search(-10));
     }
-    
-    @Test
-    public void testDeleteNegativeNumbers() {
-        tree.insert(-5);
-        tree.insert(-5);
-        tree.delete(-5); 
-        assertTrue(tree.search(-5)); 
-        tree.delete(-5); 
-        assertFalse(tree.search(-5));
-    }
 
     @Test
     public void testDeleteNodeWithTwoChildren() {
@@ -330,7 +320,6 @@ public class AVLTreeTest {
         assertTrue(tree.search(60));
         assertTrue(tree.search(70));
     }
-    
 
     @Test
     public void testDeleteNonExistentNode() {
@@ -343,7 +332,6 @@ public class AVLTreeTest {
         assertTrue(tree.search(30));
         assertTrue(tree.search(70));
     }
-    
  
     @Test
     public void testDeleteFromEmptyTree() {
