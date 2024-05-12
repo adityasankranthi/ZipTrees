@@ -107,4 +107,7 @@ For the ZipTree class, essential methods for insertion, deletion, and search hav
 Status (as of current date: 04-14-2024)
 Added all the methods for the ZIP Tree file and included the Efficiency Test file, along with the required test cases to compare both the ZIP tree and AVL tree. We observed a very small time difference in the execution of the test cases, where the ZIP tree test cases executed faster than the AVL tree. However, the time difference is very small. We plan to design better test cases to establish a legitimate difference in efficiency between AVL and ZIP Trees. 
 
+Status (as of current date: 05-12-2024)
+We have updated the rank calculation in our implementation from a uniform to a geometric distribution, aligning with the theoretical design of zip trees. The foundational methods—insert, delete, and search—have been implemented and rigorously tested against test suites designed to assess functionality and efficiency. In addition, we compared the performance of zip trees to AVL trees, as outlined in our original plan. Through iterative methods discussed in the academic paper, we found that zip trees perform comparably to AVL trees. Notably, zip trees offer advantages in terms of space efficiency and update operations. The average depth and update times for zip trees are competitively effective.
+
 
